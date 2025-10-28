@@ -1,0 +1,1 @@
+INSERT INTO utmn.student (fio) VALUES ('Бережная Надежда Евгеньевна');

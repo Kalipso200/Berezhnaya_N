@@ -1,10 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <databaseChangeLog
         xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
-    <changeSet runAlways="true" author="Berezhnaya" id="script1" dbms="postgresql">
+    <changeSet author="Berezhnaya" id="script1" dbms="postgresql">
+        <preConditions onFail="MARK_RAN">
+            <not>
+                <tableExists tableName="student" schemaName="utmn"/>
+            </not>
+        </preConditions>
         <sqlFile dbms="postgresql"
                  path="scripts/script1.sql"
                  encoding="UTF-8"
@@ -14,6 +20,13 @@
                  stripComments="true"
         />
         <comment>Создание первой таблицы</comment>
+    </changeSet>
+
+    <changeSet author="Berezhnaya" id="insert_data" runAlways="true">
+        <sqlFile path="scripts/script2.sql"
+                 relativeToChangelogFile="true"
+                 encoding="UTF-8"
+                 splitStatements="true"/>
     </changeSet>
 
 </databaseChangeLog>
